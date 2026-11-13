@@ -1,0 +1,7 @@
+{"builds":{
+"Raiden Shogun":{"weapons":["Engulfing Lightning","The Catch"],"sets":"Emblem of Severed Fate","stats":"Sands ER / Goblet Electro DMG / Circlet CRIT"},
+"Hu Tao":{"weapons":["Staff of Homa","Dragon's Bane"],"sets":"Crimson Witch of Flames","stats":"Sands HP% / Goblet Pyro DMG / Circlet CRIT"},
+"Xingqiu":{"weapons":["Sacrificial Sword","Favonius Sword"],"sets":"Emblem of Severed Fate","stats":"Sands ATK% or ER / Goblet Hydro DMG / Circlet CRIT"},
+"Kazuha":{"weapons":["Freedom-Sworn","Iron Sting"],"sets":"Viridescent Venerer","stats":"Sands/Goblet/Circlet Elemental Mastery"},
+"Bennett":{"weapons":["Mistsplitter Reforged","Sapwood Blade"],"sets":"Noblesse Oblige","stats":"Sands ER / Goblet HP% / Circlet Healing Bonus"}},
+"teams":[{"name":"National","members":["Xiangling","Bennett","Xingqiu","Raiden Shogun"]},{"name":"Hu Tao Vaporize","members":["Hu Tao","Xingqiu","Zhongli","Yelan"]},{"name":"Taser","members":["Fischl","Raiden Shogun","Kazuha","Bennett"]}]}

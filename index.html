@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#211637"><link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon.svg">
+<title>Teyvat Tracker</title><style>
+:root{--bg:#151020;--panel:#241b35;--panel2:#302344;--gold:#e6c47a;--text:#f5efff;--muted:#c2b6d2;--line:#514265}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#35264c,var(--bg) 55%);color:var(--text);font:16px system-ui, sans-serif}
+header{padding:24px 18px 18px;text-align:center;border-bottom:1px solid var(--line);background:#171123cc}
+h1{margin:0;color:var(--gold);letter-spacing:1px;font-size:clamp(27px,6vw,40px)}header p{margin:7px 0 0;color:var(--muted)}
+nav{display:flex;gap:8px;overflow:auto;padding:12px;position:sticky;top:0;background:#171123f2;z-index:2}
+nav button{white-space:nowrap;border:1px solid var(--line);background:var(--panel);color:var(--text);padding:10px 13px;border-radius:20px}
+nav button.active{background:var(--gold);color:#211637;font-weight:700}
+main{max-width:900px;margin:auto;padding:18px}
+section{display:none}section.active{display:block}.card{background:linear-gradient(145deg,var(--panel),#1e172c);border:1px solid var(--line);border-radius:16px;padding:16px;margin:12px 0}
+h2{color:var(--gold);margin:0 0 12px}h3{margin:0 0 8px;color:#ead8ad}
+label{display:block;color:var(--muted);font-size:14px;margin:10px 0 5px}
+input,select,textarea{width:100%;padding:11px;border-radius:9px;border:1px solid var(--line);background:#171123;color:var(--text);font:inherit}
+button.action{border:0;border-radius:10px;padding:11px 15px;background:var(--gold);color:#211637;font-weight:700;margin-top:10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+.small{color:var(--muted);font-size:13px;line-height:1.5}.result{color:var(--gold);font-weight:700;margin-top:10px;overflow-wrap:anywhere}
+.item{padding:10px;border-bottom:1px solid var(--line)}.item:last-child{border:0}
+
+input,select,textarea{font-size:16px;min-height:44px}button{min-height:44px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.row>*{flex:1 1 130px}
+.tag{display:inline-block;padding:2px 8px;border-radius:10px;background:var(--panel2);border:1px solid var(--line);font-size:12px;color:var(--gold);margin:2px 4px 2px 0}
+.x{float:right;background:none;border:1px solid var(--line);color:var(--muted);border-radius:8px;min-height:32px;padding:0 10px}
+.bar{height:8px;background:#171123;border-radius:6px;overflow:hidden;margin-top:6px}.bar i{display:block;height:100%;background:var(--gold)}
+.warn{color:#ffb4a8}.t5{color:var(--gold)}.t4{color:#c9a4ff}
+a{color:var(--gold)}.item{cursor:default}.pick{cursor:pointer}
+
+body{background:radial-gradient(circle at 15% 8%,#4b3a6e55 0,transparent 25%),radial-gradient(circle at 85% 20%,#e6c47a22 0,transparent 20%),radial-gradient(circle at top,#35264c,var(--bg) 55%) fixed}
+header{position:relative;border-bottom:2px solid var(--gold);box-shadow:0 4px 24px #e6c47a22}
+header h1{text-shadow:0 0 18px #e6c47a66;font-family:Georgia,'Times New Roman',serif}
+header::after{content:"◆  ✦  ◆";display:block;color:var(--gold);font-size:12px;letter-spacing:8px;margin-top:8px;opacity:.8}
+.hero{background:linear-gradient(135deg,#3a2a57,#1e172c);border:1px solid var(--gold);border-radius:18px;padding:18px;box-shadow:0 0 28px #e6c47a22 inset,0 6px 22px #0006;position:relative;overflow:hidden}
+.hero::before{content:"✦";position:absolute;right:-10px;top:-30px;font-size:130px;color:var(--gold);opacity:.07}
+.hero h2{font-family:Georgia,serif;font-size:22px;margin:0 0 4px}
+.elems{display:flex;gap:6px;margin:10px 0}.elems i{flex:1;height:5px;border-radius:3px}
+.resin{display:flex;align-items:center;gap:14px;margin-top:10px}.resin b{font-size:34px;color:var(--gold);font-family:Georgia,serif}
+.tiles{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:14px 0}
+.tile{border:1px solid #e6c47a55;border-top:3px solid var(--c,var(--gold));border-radius:14px;padding:14px 8px;text-align:center;background:linear-gradient(160deg,var(--panel2),var(--panel));color:var(--text);font:inherit;min-height:84px}
+.tile span{display:block;font-size:26px;color:var(--c,var(--gold))}.tile:active{transform:scale(.97);box-shadow:0 0 14px var(--c,var(--gold))}
+#mapFrame{width:100%;height:68vh;border:1px solid var(--line);border-radius:12px;background:#171123;margin-top:10px}
+</style></head><body>
+<header><h1>✦ Teyvat Tracker ✦</h1><p>Builds, teams, banners and farming — in your pocket</p></header>
+<nav id="tabs"></nav><main>
+<section id="home" class="active"><div class="hero"><h2 id="greet">Welcome, Traveler</h2><div class="small">Teyvat awaits. <span id="homeDay"></span></div>
+<div class="elems"><i style="background:#33d6b5"></i><i style="background:#f0b232"></i><i style="background:#b57dff"></i><i style="background:#8bd13f"></i><i style="background:#3b8cff"></i><i style="background:#ff6a4d"></i><i style="background:#9fe8f0"></i></div>
+<div class="resin"><div><div class="small">Original Resin</div><b id="resinNow">–</b><span class="small"> / 160</span></div><div class="small" id="resinFull"></div></div>
+<div class="row" style="margin-top:8px"><input id="resinIn" type="number" min="0" max="160" placeholder="Current resin"><button class="action" style="margin:0" onclick="setResin()">Set</button></div></div>
+<div class="tiles" id="tiles"></div>
+<div class="card"><h3>✦ Banners now</h3><div id="homeBanners" class="small"></div></div>
+<div class="card"><h3>Your adventure</h3><div id="homeStats" class="small"></div><div id="dataStatus" class="small" style="margin-top:8px"></div><button class="action" onclick="loadData(true)">Refresh game data</button></div></section><section id="banners"><div class="card"><h2>Banners</h2><div id="bannerMeta" class="small"></div><div id="bannerList"></div>
+<label>Optional custom banner feed URL (JSON, same format as banners.json)</label><input id="feedUrl" placeholder="https://…/banners.json"><button class="action" onclick="saveFeed()">Save &amp; refresh</button>
+<p class="small">Sources to verify: <a href="https://www.pcgamesn.com/genshin-impact/next-banner-schedule-event-wishes" target="_blank" rel="noopener">PCGamesN banner schedule</a> · in-game news. Banners come from a data file, not an official API.</p></div></section><section id="roster"><div class="card"><h2>Characters</h2><div class="row"><select id="fEl"></select><select id="fR"><option value="">Any rarity</option><option>5</option><option>4</option></select></div><input id="fQ" placeholder="Filter list (optional)" style="margin-top:8px"><div id="rosterList"></div></div></section><section id="characters"><div class="card"><h2>Character builds</h2><label>Character</label><select id="charName" data-src="chars"></select><div id="recBuild" class="small"></div>
+<label>Weapon</label><select id="charWeapon" data-src="weapons"></select><label>Artifact set</label><select id="charSet" data-src="arts"></select>
+<label>Main stats / notes</label><textarea id="charNotes" rows="3" placeholder="Sands, goblet, circlet, talents..."></textarea>
+<button class="action" onclick="saveCharacter()">Save build</button><div id="characterList"></div></div></section><section id="teams"><div class="card"><h2>Team builder</h2><div id="recTeams" class="small"></div><div class="grid"><select id="t1" data-src="chars"></select><select id="t2" data-src="chars"></select><select id="t3" data-src="chars"></select><select id="t4" data-src="chars"></select></div>
+<label>Team notes</label><input id="teamNotes" placeholder="Rotation, reactions, roles..."><button class="action" onclick="saveTeam()">Save team</button><div id="teamList"></div></div></section><section id="weapons"><div class="card"><h2>Weapons</h2><div class="row"><select id="wR"><option value="">Any rarity</option><option>5</option><option>4</option><option>3</option></select><select id="wT"></select></div><input id="wQ" placeholder="Filter list (optional)" style="margin-top:8px"><div id="weaponCat" style="max-height:340px;overflow:auto"></div></div>
+<div class="card"><h3>My weapon notes</h3><label>Weapon</label><select id="weaponName" data-src="weapons"></select><label>Who uses it?</label><select id="weaponUser" data-src="chars"></select><label>Notes</label><input id="weaponNotes" placeholder="Best use, refinement..."><button class="action" onclick="saveWeapon()">Save weapon</button><div id="weaponList"></div></div></section><section id="artifacts"><div class="card"><h2>Artifact sets</h2><input id="aQ" placeholder="Filter list (optional)"><div id="artCat" style="max-height:340px;overflow:auto"></div></div>
+<div class="card"><h2>Artifact score estimate</h2><p class="small">A simple personal scoring helper, not an official ranking.</p>
+<div class="grid"><div><label>Crit Rate</label><input id="cr" type="number" min="0" max="100" value="10"></div><div><label>Crit DMG</label><input id="cd" type="number" min="0" max="300" value="20"></div><div><label>ATK %</label><input id="atk" type="number" min="0" max="100" value="5"></div><div><label>Energy Recharge %</label><input id="er" type="number" min="0" max="100" value="5"></div></div>
+<button class="action" onclick="scoreArtifact()">Calculate score</button><div id="artifactResult" class="result"></div></div></section><section id="compare"><h2 style="color:var(--gold)">Compare builds</h2><div class="grid"><div class="card"><h3>Build A</h3><select id="ac" data-src="chars"></select><label>ATK</label><input id="aa" type="number" value="2000"><label>Talent multiplier %</label><input id="am" type="number" value="200"><label>DMG bonus %</label><input id="ab" type="number" value="46.6"><label>Crit rate %</label><input id="ar" type="number" value="60"><label>Crit DMG %</label><input id="ad" type="number" value="120"></div><div class="card"><h3>Build B</h3><select id="bc" data-src="chars"></select><label>ATK</label><input id="ba" type="number" value="2000"><label>Talent multiplier %</label><input id="bm" type="number" value="200"><label>DMG bonus %</label><input id="bb" type="number" value="46.6"><label>Crit rate %</label><input id="br" type="number" value="60"><label>Crit DMG %</label><input id="bd" type="number" value="120"></div></div><button class="action" onclick="compare()">Compare</button><div id="cmpResult" class="result"></div><p class="small">Average damage = ATK × multiplier × (1+DMG bonus) × (1 + crit rate × crit DMG). Ignores enemy defence/resistance and reactions.</p></section><section id="rankings"><div class="card"><h2>Character rankings</h2><p class="small">Live percentile leaderboards: <a href="https://akasha.cv" target="_blank" rel="noopener">Akasha.cv</a>. Below is your own tier list.</p>
+<div class="row"><select id="tierChar" data-src="chars"></select><select id="tierVal"><option>S</option><option>A</option><option>B</option><option>C</option><option>D</option></select></div><button class="action" onclick="saveTier()">Add to tier list</button><div id="tierList"></div>
+<label>Free-form ranking note</label><input id="rankNote" placeholder="e.g. Character, top 10%"><button class="action" onclick="saveRank()">Save ranking note</button><div id="rankList"></div></div></section><section id="farming"><div class="card"><h2>Farming planner</h2><div id="today" class="small"></div>
+<label>For character</label><select id="farmChar" data-src="chars"></select><label>Material type</label><select id="farmType"><option>Talent books</option><option>Weapon ascension</option><option>Character ascension boss</option><option>Local specialty</option><option>Artifacts</option><option>Other</option></select>
+<label>Material details (optional)</label><input id="farmItem" placeholder="e.g. Teachings of Ballad"><label>Amount needed</label><input id="farmAmount" type="number" min="1" placeholder="0">
+<button class="action" onclick="saveFarm()">Add to plan</button><div id="farmList"></div></div></section><section id="calculator"><div class="card"><h2>Quick damage estimate</h2><p class="small">A simplified estimate. It does not include every game modifier.</p>
+<label>Talent multiplier (%)</label><input id="mult" type="number" value="200"><label>ATK</label><input id="baseAtk" type="number" value="2000"><label>Damage bonus (%)</label><input id="bonus" type="number" value="46.6"><label>Crit DMG (%)</label><input id="crit" type="number" value="100">
+<button class="action" onclick="calcDamage()">Estimate damage</button><div id="damageResult" class="result"></div></div></section><section id="account"><div class="card"><h2>Account tracker</h2><div class="grid"><div><label>Adventure Rank</label><input id="ar" type="number" min="1" max="60"></div><div><label>World Level</label><input id="wl" type="number" min="0" max="9"></div><div><label>Primogems</label><input id="primos" type="number" min="0"></div><div><label>Intertwined Fates</label><input id="fates" type="number" min="0"></div><div><label>Character pity</label><input id="pityC" type="number" min="0" max="89"></div><div><label>Weapon pity</label><input id="pityW" type="number" min="0" max="79"></div></div>
+<label>Notes</label><textarea id="accountNotes" rows="3"></textarea><button class="action" onclick="saveAccount()">Save account info</button><div id="accountResult" class="result"></div></div>
+<div class="card"><h3>Characters I own</h3><div class="row"><select id="ownChar" data-src="chars"></select><select id="ownC"><option>C0</option><option>C1</option><option>C2</option><option>C3</option><option>C4</option><option>C5</option><option>C6</option></select></div><button class="action" onclick="saveOwn()">Add / update</button><div id="ownList"></div></div></section><section id="map"><div class="card"><h2>Interactive Map</h2><label>Region / layer</label><select id="mapSel"></select>
+<div class="row"><button class="action" onclick="loadMap()">Load map</button><button class="action" onclick="fsMap()">Fullscreen</button><button class="action" onclick="openMap()">Open in browser</button></div>
+<p class="small">Map by genshin-impact-map.appsample.com (third party). It tracks your found chests and Oculi and saves progress with its own account. If it shows blank or won't save progress, use “Open in browser”. Loads only when you tap, to save data.</p>
+<iframe id="mapFrame" title="Genshin map" loading="lazy" allow="fullscreen;geolocation" sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-modals" hidden></iframe></div></section></main><script src="app.js"></script><script>if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{})</script></body></html>
